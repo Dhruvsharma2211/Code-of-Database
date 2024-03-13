@@ -1,0 +1,34 @@
+-- CREATE spool file
+SPOOL C:\Users\dhruv\Desktop\Lasalle\Database\project3\P3Q1_SPOOL.txt
+
+SELECT to_char(sysdate,'DD MM YYYY Day HH:MI:SS Am') FROM dual;
+
+-- to CREATE user
+CREATE user c##dhruv_f11 identified by 2211;
+
+--GRANT permission
+GRANT connect, resource to c##dhruv_f11;
+
+--connect to user;
+conn c##dhruv_f11/2211;
+
+--CREATE first table CUSTOMER
+CREATE table CUSTOMER(CId number primary key,CName varchar2(50),CNumber varchar2(50));
+
+--CREATE table ORDERS;
+CREATE table ORDERS(OId number primary key, Odate date,CId number,constraint CId foreign key(CId) references CUSTOMER(CId));
+
+--CREATE table PRODUCT;
+CREATE table PRODUCT(PId number primary key, DES varchar2(50),price number);
+
+--CREATE table ORDER_LINE
+CREATE table ORDER_LINE(PId number,OId number,quantity varchar2(50),constraint pk primary key(PId,OId));
+
+--desc all Tabless
+desc ORDER_LINE;
+desc CUSTOMER;
+desc ORDERS;
+desc PRODUCT;
+
+--spool off Save spool file
+spool off;
